@@ -64,15 +64,7 @@
     </style>
 </head>
 <body>
-<h1>Breadborad</h1>
-<div>
-    <ul>
-        @forelse($projects as $project)
-            <li><a href="{{ $project->path() }}">{{$project->title}}</a></li>
-        @empty
-            No projects found!
-        @endforelse
-    </ul>
-</div>
+<h1>{{ $project->title }}</h1>
+<div>{{ $project->description }}</div>
 </body>
 </html>
