@@ -1,80 +1,16 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
+@section('content')
+    <h1>Create a project</h1>
+    <form method="post" action="/projects">
+        @csrf
+        <div>Title:</div>
+        <div><input type="text" value="" name="title"></div>
 
-    <title>Laravel</title>
+        <div>Description:</div>
+        <div><textarea name="description"></textarea></div>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
-</head>
-<body>
-<h1>Breadborad</h1>
-<form method="post" action="/projects">
-    @csrf
-    <div>Title: </div>
-    <div><input type="text" value="" name="title"></div>
-    <div>Description: </div>
-    <div><textarea name="description"></textarea></div>
-    <div><input type="submit"></div>
-
-
-
-</form>
-</body>
-</html>
+        <div><input type="submit">
+            <a href="/projects">Cancel</a>
+        </div>
+    </form>
+@endsection
