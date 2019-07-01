@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Facades\Tests\Setup\ProjectFactory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,6 +20,8 @@ class ManageProjectsTest extends TestCase
         $this->get('/projects/create')->assertRedirect('login');
         $this->get($project->path())->assertRedirect('login');
         $this->post('/projects', $project->toArray())->assertRedirect('/login');
+
+        $this->patch($project->path(), [])->assertRedirect('/login');
 
     }
 
@@ -43,6 +46,34 @@ class ManageProjectsTest extends TestCase
         $this->get('/projects')->assertSee($attribures['title']);
 
     }
+
+
+    /** @test */
+    public function only_authenticated_user_can_update_their_own_project()
+    {
+
+        $project = ProjectFactory::create();
+
+        $this->signIn();
+
+        $attributes = ['title' => 'Changed title', 'description' => 'Changed description', 'notes'];
+        $this->patch($project->path(), $attributes)->assertStatus(403);
+
+        $project = ProjectFactory::create();
+
+        $attributes = ['title' => 'Changed title', 'description' => 'Changed description', 'notes' => 'General notes'];
+
+        $this->actingAs($project->owner)
+             ->patch($project->path(), $attributes);
+
+        $this->assertDatabaseHas('projects', $attributes);
+
+        $this->get($project->path())
+             ->assertSee('Changed title')
+             ->assertSee('Changed description')
+             ->assertSee('General notes');
+    }
+
 
     /** @test */
     public function a_user_can_view_their_project()

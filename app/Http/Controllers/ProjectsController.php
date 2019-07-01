@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use Tests\Setup\ProjectFactory;
 
 class ProjectsController extends Controller
 {
@@ -17,9 +18,8 @@ class ProjectsController extends Controller
 
     public function show(Project $project)
     {
-        if (auth()->user()->isNot($project->owner)) {
-            abort(403);
-        }
+
+        $this->authorize('update', $project);
 
         return view('projects.show', compact('project'));
     }
@@ -46,4 +46,24 @@ class ProjectsController extends Controller
         return redirect('/projects');
 
     }
+
+    public function update(Project $project)
+    {
+        $this->authorize('update', $project);
+
+        $attributes = \request()->validate(
+            [
+                'title'       => 'required',
+                'description' => 'required',
+                'notes'       => 'nullable',
+            ]
+        );
+
+
+        $project->update($attributes);
+
+        return redirect($project->path());
+
+    }
+
 }

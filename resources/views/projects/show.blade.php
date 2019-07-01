@@ -8,5 +8,7 @@
         @endforeach
 
     </div>
+
+    <p>{{ $project->notes }}</p>
     <a href="/projects">Go back!</a>
 @endsection

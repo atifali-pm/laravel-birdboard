@@ -1,0 +1,12 @@
+[2019-06-18 06:21:52] local.ERROR: file_put_contents(/home/vagrant/projects/php/birdboard/storage/framework/sessions/LWu8c3DvMgTHvazm6HmOxUBg9wc3rpejKI8gvmNx): failed to open stream: Permission denied {"exception":"[object] (ErrorException(code: 0): file_put_contents(/home/vagrant/projects/php/birdboard/storage/framework/sessions/LWu8c3DvMgTHvazm6HmOxUBg9wc3rpejKI8gvmNx): failed to open stream: Permission denied at /home/vagrant/projects/php/birdboard/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:122)
+[stacktrace]
+#0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/home/vagrant/p...', 122, Array)
+#1 /home/vagrant/projects/php/birdboard/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(122): file_put_contents('/home/vagrant/p...', 'a:3:{s:6:\"_toke...', 2)
+#2 /home/vagrant/projects/php/birdboard/vendor/laravel/framework/src/Illuminate/Session/FileSessionHandler.php(83): Illuminate\\Filesystem\\Filesystem->put('/home/vagrant/p...', 'a:3:{s:6:\"_toke...', true)
+#3 /home/vagrant/projects/php/birdboard/vendor/laravel/framework/src/Illuminate/Session/Store.php(129): Illuminate\\Session\\FileSessionHandler->write('LWu8c3DvMgTHvaz...', 'a:3:{s:6:\"_toke...')
+#4 /home/vagrant/projects/php/birdboard/vendor/laravel/framework/src/Illuminate/Session/Middleware/StartSession.php(87): Illuminate\\Session\\Store->save()
+#5 /home/vagrant/projects/php/birdboard/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(218): Illuminate\\Session\\Middleware\\StartSession->terminate(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\Response))
+#6 /home/vagrant/projects/php/birdboard/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(189): Illuminate\\Foundation\\Http\\Kernel->terminateMiddleware(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\Response))
+#7 /home/vagrant/projects/php/birdboard/public/index.php(60): Illuminate\\Foundation\\Http\\Kernel->terminate(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\Response))
+#8 {main}
+"} 
